@@ -19,3 +19,11 @@ func NewNode(id string, store *storage.Store) *Node {
 func (n *Node) Put(key, value string){
 	n.Store.Put(key, value)
 }
+
+func (n *Node) Get(key string) (string, bool) {
+	return n.Store.Get(key)
+}
+
+func (n *Node) Delete(key string){
+	n.Store.Delete(key)
+}
