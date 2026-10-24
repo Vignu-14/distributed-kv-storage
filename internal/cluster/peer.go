@@ -24,6 +24,7 @@ func NewPeer(id, addr string) *Peer {
 func (p *Peer) SetAlive(status bool)bool{
 	p.mu.Lock()
 	changed := p.alive != status
+	p.alive = status
 	if status {
 		p.lastSeen = time.Now()
 	}
