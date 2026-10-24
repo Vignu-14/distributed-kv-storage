@@ -13,3 +13,15 @@ func NewStore() *Store {
 	}
 }
 
+func (s *Store) Put(key, value string) {
+	s.mu.Lock()
+	s.data[key] = value
+	s.mu.Unlock()
+}
+
+func (s *Store) Get(key string) (string, bool) {
+	s.mu.RLock()
+	value, exists := s.data[key]
+	s.mu.RUnlock()
+	return value, exists	
+}
