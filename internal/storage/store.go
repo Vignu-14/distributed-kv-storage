@@ -25,3 +25,9 @@ func (s *Store) Get(key string) (string, bool) {
 	s.mu.RUnlock()
 	return value, exists	
 }
+
+func (s *Store) Delete(key string) {
+	s.mu.Lock()
+	delete(s.data, key)
+	s.mu.Unlock()
+}
