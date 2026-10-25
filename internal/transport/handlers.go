@@ -36,6 +36,20 @@ func(s *Server) handleKV(w http.ResponseWriter, r *http.Request) {
 			NodeId: s.Node.ID,
 			Status: "deleted",
 		})
+	case http.MethodGet:
+		key := r.URL.Query().Get("key")
+		value, exists := s.Node.Store.Get(key)
+		if !exists{
+			http.Error(w, "key does not exists", http.StatusBadRequest)
+			return
+		}
+		writeJson(w, http.StatusOK, KVResponse{
+			NodeId: s.Node.ID,
+			Key: key,
+			Value: value,
+			Status: "success",
+		})
+
 	}
 }
 
