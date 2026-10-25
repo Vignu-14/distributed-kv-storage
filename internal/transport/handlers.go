@@ -11,6 +11,7 @@ func(s *Server) handleHealth(w http.ResponseWriter, r *http.Request){
 		Status: "alive",
 	})
 }
+  
 
 func writeJson(w http.ResponseWriter, code int, payload any){
 	w.Header().Set("Content-Type", "application/json")
