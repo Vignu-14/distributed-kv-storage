@@ -29,6 +29,13 @@ func(s *Server) handleKV(w http.ResponseWriter, r *http.Request) {
 			Status: "created",
 		})
 	
+	case http.MethodDelete:
+		key := r.URL.Query().Get("key")
+		s.Node.Store.Delete(key)
+		writeJson(w, http.StatusNoContent, KVResponse{
+			NodeId: s.Node.ID,
+			Status: "deleted",
+		})
 	}
 }
 
